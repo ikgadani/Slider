@@ -152,7 +152,7 @@ public class Slider implements Serializable {
 
     @Override
     public String toString() {
-        return "cst8218.ved.slider.entity.Slider[ id=" + id + " ]";
+        return "cst8218.slider.entity.Slider[ id=" + id + " ]";
     }
     /**
     * Updates the properties to simulate the passing of one unit of time.
