@@ -1,16 +1,16 @@
-C:\Drive - D\Algonquin\Web\Assignment\slider-ved\src\main\java\cst8218\ved\slider\presentation\exceptions\RollbackFailureException.java
-C:\Drive - D\Algonquin\Web\Assignment\slider-ved\src\main\java\cst8218\ved\slider\ejb\AbstractFacade.java
-C:\Drive - D\Algonquin\Web\Assignment\slider-ved\src\main\java\cst8218\ved\slider\presentation\SliderJpaController.java
-C:\Drive - D\Algonquin\Web\Assignment\slider-ved\src\main\java\cst8218\ved\slider\presentation\util\JsfUtil.java
-C:\Drive - D\Algonquin\Web\Assignment\slider-ved\src\main\java\cst8218\ved\slider\ejb\SliderFacade.java
-C:\Drive - D\Algonquin\Web\Assignment\slider-ved\src\main\java\cst8218\ved\slider\service\SliderFacadeREST.java
-C:\Drive - D\Algonquin\Web\Assignment\slider-ved\src\main\java\cst8218\ved\slider\presentation\SliderController.java
-C:\Drive - D\Algonquin\Web\Assignment\slider-ved\src\main\java\cst8218\ved\slider\presentation\exceptions\PreexistingEntityException.java
-C:\Drive - D\Algonquin\Web\Assignment\slider-ved\src\main\java\cst8218\ved\slider\JakartaRestConfiguration.java
-C:\Drive - D\Algonquin\Web\Assignment\slider-ved\src\main\java\cst8218\ved\slider\presentation\exceptions\NonexistentEntityException.java
-C:\Drive - D\Algonquin\Web\Assignment\slider-ved\src\main\java\cst8218\ved\slider\presentation\util\PaginationHelper.java
-C:\Drive - D\Algonquin\Web\Assignment\slider-ved\src\main\java\cst8218\ved\slider\service\AbstractFacade.java
-C:\Drive - D\Algonquin\Web\Assignment\slider-ved\src\main\java\cst8218\ved\slider\resources\JakartaEE10Resource.java
-C:\Drive - D\Algonquin\Web\Assignment\slider-ved\src\main\java\cst8218\ved\slider\entity\Slider.java
-C:\Drive - D\Algonquin\Web\Assignment\slider-ved\src\main\java\cst8218\ved\slider\presentation\exceptions\IllegalOrphanException.java
-C:\Drive - D\Algonquin\Web\Assignment\slider-ved\src\main\java\cst8218\ved\slider\game\SliderGame.java
+D:\24F\24F_CST8218_300_Web Enterprise\Slider\src\main\java\cst8218\slider\presentation\util\JsfUtil.java
+D:\24F\24F_CST8218_300_Web Enterprise\Slider\src\main\java\cst8218\slider\service\SliderFacadeREST.java
+D:\24F\24F_CST8218_300_Web Enterprise\Slider\src\main\java\cst8218\slider\ejb\AbstractFacade.java
+D:\24F\24F_CST8218_300_Web Enterprise\Slider\src\main\java\cst8218\slider\presentation\util\PaginationHelper.java
+D:\24F\24F_CST8218_300_Web Enterprise\Slider\src\main\java\cst8218\slider\ejb\SliderFacade.java
+D:\24F\24F_CST8218_300_Web Enterprise\Slider\src\main\java\cst8218\slider\JakartaRestConfiguration.java
+D:\24F\24F_CST8218_300_Web Enterprise\Slider\src\main\java\cst8218slider\presentation\exceptions\IllegalOrphanException.java
+D:\24F\24F_CST8218_300_Web Enterprise\Slider\src\main\java\cst8218slider\presentation\exceptions\NonexistentEntityException.java
+D:\24F\24F_CST8218_300_Web Enterprise\Slider\src\main\java\cst8218slider\presentation\exceptions\PreexistingEntityException.java
+D:\24F\24F_CST8218_300_Web Enterprise\Slider\src\main\java\cst8218\slider\entity\Slider.java
+D:\24F\24F_CST8218_300_Web Enterprise\Slider\src\main\java\cst8218\slider\presentation\SliderController.java
+D:\24F\24F_CST8218_300_Web Enterprise\Slider\src\main\java\cst8218\slider\service\AbstractFacade.java
+D:\24F\24F_CST8218_300_Web Enterprise\Slider\src\main\java\cst8218\slider\game\SliderGame.java
+D:\24F\24F_CST8218_300_Web Enterprise\Slider\src\main\java\cst8218\slider\presentation\SliderJpaController.java
+D:\24F\24F_CST8218_300_Web Enterprise\Slider\src\main\java\cst8218\slider\resources\JakartaEE10Resource.java
+D:\24F\24F_CST8218_300_Web Enterprise\Slider\src\main\java\cst8218slider\presentation\exceptions\RollbackFailureException.java
