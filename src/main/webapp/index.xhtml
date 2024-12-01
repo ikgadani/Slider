@@ -2,10 +2,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"> <!-- Added missing namespace -->
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-    <f:view locale="#{contactController.locale}">
-
+    <f:view locale="#{sliderController.locale}">
         <h:head>
             <title>Facelet Title</title>
             <h:outputStylesheet name="css/jsfcrud.css" />
@@ -15,14 +15,16 @@
             <br />
             <h:link outcome="/slider/List" value="Show All Slider Items" />
             <h:form>
-                <!-- Language Selector -->
-                <h:selectOneMenu value="#{sliderController.language}">
+                <h:selectOneMenu value="#{sliderController.language}" onchange="submit()">
                     <f:selectItem itemValue="en" itemLabel="English" />
                     <f:selectItem itemValue="fr" itemLabel="French" />
-                    <f:ajax render="@all" />
-                </h:selectOneMenu>                
+                </h:selectOneMenu>
             </h:form>
-        </h:body>
 
+            <h:form>
+                <p><h:link outcome="/slider/List" value="#{bundle.SliderCreated}" /></p>
+            </h:form>
+
+        </h:body>
     </f:view>
 </html>
