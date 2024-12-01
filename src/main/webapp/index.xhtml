@@ -7,13 +7,12 @@
 
     <f:view locale="#{sliderController.locale}">
         <h:head>
-            <title>Facelet Title</title>
+            <title>#{bundle.Title}</title>
             <h:outputStylesheet name="css/jsfcrud.css" />
         </h:head>
         <h:body>
-            Hello from Facelets
+            <h:outputText value="#{bundle.Welcome}"/>
             <br />
-            <h:link outcome="/slider/List" value="Show All Slider Items" />
             <h:form>
                 <h:selectOneMenu value="#{sliderController.language}" onchange="submit()">
                     <f:selectItem itemValue="en" itemLabel="English" />
@@ -22,7 +21,7 @@
             </h:form>
 
             <h:form>
-                <p><h:link outcome="/slider/List" value="#{bundle.SliderCreated}" /></p>
+                <p><h:link outcome="/slider/List" value="#{bundle.CreateSliderShowAllLink}" /></p>
             </h:form>
 
         </h:body>
