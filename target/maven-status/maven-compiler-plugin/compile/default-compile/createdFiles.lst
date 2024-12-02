@@ -11,6 +11,7 @@ cst8218\slider\game\SliderGame.class
 cst8218\slider\ejb\SliderFacade.class
 cst8218slider\presentation\exceptions\NonexistentEntityException.class
 cst8218\slider\presentation\SliderController$1.class
+cst8218\slider\client\SliderSwingClient.class
 cst8218\slider\service\AbstractFacade.class
 cst8218\slider\JakartaRestConfiguration.class
 cst8218\slider\presentation\SliderController.class
