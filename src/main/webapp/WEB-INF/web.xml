@@ -58,4 +58,7 @@
     <security-role>
         <role-name>JsfGroup</role-name>
     </security-role>
+    <security-role>
+        <role-name>Admin</role-name>
+    </security-role>
 </web-app>
