@@ -16,10 +16,12 @@ import jakarta.ws.rs.core.Application;
  * @author Juneau
  */
 @ApplicationPath("resources")
-/*@FormAuthenticationMechanismDefinition(
+/**
+@FormAuthenticationMechanismDefinition(
         loginToContinue = @LoginToContinue(
                 loginPage = "/login.html",
-                errorPage = "/login.html"))*/
+                errorPage = "/login.html"))
+**/
 @BasicAuthenticationMechanismDefinition
 @DatabaseIdentityStoreDefinition(
         dataSourceLookup = "${'java:comp/DefaultDataSource'}",

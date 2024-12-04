@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Slider Animation</title>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script async src="https://ga.jspm.io/npm:es-module-shims@1.7.0/dist/es-module-shims.js"></script>
+    <script type="importmap">
+        {
+        "imports": {
+        "react": "https://esm.sh/react?dev",
+        "react-dom/client": "https://esm.sh/react-dom/client?dev"
+        }
+        }
+    </script>
+    <style>
+        canvas {
+            border: 1px solid black;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel" data-type="module">
+        import React, { useEffect, useState, useRef } from 'react';
+        import { createRoot } from 'react-dom/client';
+
+        function Slider() {
+            const [selected, setSelected] = useState(null);
+            const [slider, setSlider] = useState([]);
+            const canvasRef = useRef(null);
+
+            // Fetch slider data
+            useEffect(() => {
+                async function getSlider() {
+                    try {
+                        const result = await fetch(
+                            "http://localhost:8080/Slider/resources/cst8218.slider.entity.slider",
+                            {
+                                method: 'GET',
+                                headers: { 'Accept': 'application/json' }
+                            }
+                        );
+                        const json = await result.json();
+                        setSlider(json);
+                    } catch (error) {
+                        console.error("Error fetching slider data:", error);
+                    }
+                }
+                getSlider();
+            }, []);
+
+            // Handle input changes
+            function handleChange(event, field, index) {
+                const newValue = event.target.value;
+                setSelected({ index, field, value: newValue });
+            }
+
+            // Handle form submission
+            const handleSubmit = async (event) => {
+                event.preventDefault();
+                if (!selected) return;
+
+                const { index, field, value } = selected;
+                const updatedItem = {
+                    ...slider[index],
+                    [field]: value
+                };
+
+                try {
+                    await fetch(
+                        `http://localhost:8080/Slider/resources/cst8218.slider.entity.slider/${slider[index].id}`,
+                        {
+                            method: 'PUT',
+                            body: JSON.stringify(updatedItem),
+                            headers: {
+                                'Content-type': 'application/json',
+                                'Authorization': 'Basic ' + btoa('tgk:tgkpass')
+                            }
+                        }
+                    );
+                    const updatedSlider = [...slider];
+                    updatedSlider[index] = updatedItem;
+                    setSlider(updatedSlider);
+                    setSelected(null);
+                } catch (error) {
+                    console.error("Error updating slider:", error);
+                }
+            };
+
+            // Draw on the canvas based on slider values
+            const drawCanvas = () => {
+                if (canvasRef.current) {
+                    const ctx = canvasRef.current.getContext('2d');
+                    // Clear the canvas only once before rendering the shapes
+                    ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+
+                    slider.forEach(item => {
+                        const size = parseInt(item.size);
+                        const x = parseInt(item.x);
+                        const y = parseInt(item.y);
+                        const maxTravel = parseInt(item.maxTravel);
+                        const currentTravel = parseInt(item.currentTravel);
+                        const mvtDirection = item.mvtDirection === "horizontal" ? 1 : -1;
+
+                        // Draw circles based on slider values
+                        ctx.beginPath();
+                        ctx.arc(x, y, size / 2, 0, Math.PI * 2); // Create a circle (size/2 for radius)
+                        ctx.fillStyle = 'blue';
+                        ctx.fill();
+                        ctx.closePath();
+
+                        // Optionally, animate the sliders (e.g., move along the x-axis)
+                        const newX = x + mvtDirection * currentTravel;
+                        ctx.beginPath();
+                        ctx.arc(newX, y, size / 2, 0, Math.PI * 2); // Draw new position
+                        ctx.fillStyle = 'blue';
+                        ctx.fill();
+                        ctx.closePath();
+                    });
+                }
+            };
+
+
+            useEffect(() => {
+                drawCanvas();
+            }, [slider, selected]);
+
+            return (
+                <div>
+                    <form onSubmit={handleSubmit}>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Size</th>
+                                    <th>X</th>
+                                    <th>Y</th>
+                                    <th>MaxTravel</th>
+                                    <th>CurrentTravel</th>
+                                    <th>MvtDirection</th>
+                                    <th>DirChangeCount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {slider.map((item, index) => (
+                                    <tr key={index}>
+                                        {["size", "x", "y", "maxTravel", "currentTravel", "mvtDirection", "dirChangeCount"].map(field => (
+                                            <td key={field}>
+                                                <input
+                                                    type="text"
+                                                    value={selected && selected.index === index && selected.field === field ? selected.value : item[field]}
+                                                    onClick={() => setSelected({ index, field, value: item[field] })}
+                                                    onChange={(e) => handleChange(e, field, index)}
+                                                />
+                                            </td>
+                                        ))}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                        {selected && <button type="submit">Submit</button>}
+                    </form>
+                    <canvas
+                        ref={canvasRef}
+                        width={800}
+                        height={400}
+                    ></canvas>
+                </div>
+            );
+        }
+
+        const container = document.getElementById('root');
+        const root = createRoot(container);
+        root.render(<Slider />);
+    </script>
+</body>
+</html>
