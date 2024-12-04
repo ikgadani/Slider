@@ -34,5 +34,9 @@
                 <supported-locale>fr</supported-locale>
             </locale-config>
         </application>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
     </application>
 </faces-config>

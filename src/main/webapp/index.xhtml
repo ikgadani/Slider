@@ -8,6 +8,7 @@
     <f:view locale="#{sliderController.locale}">
         <h:head>
             <title>#{bundle.Title}</title>
+            <h:outputStylesheet name="css/jsfcrud.css"/>
             <h:outputStylesheet name="css/jsfcrud.css" />
         </h:head>
         <h:body>
@@ -24,6 +25,9 @@
                 <p><h:link outcome="/slider/List" value="#{bundle.CreateSliderShowAllLink}" /></p>
             </h:form>
 
+            <br />
+            <h:link outcome="/appUser/List" value="#{bundle.CreateAppUserShowAllLink}"/>
         </h:body>
+
     </f:view>
 </html>
