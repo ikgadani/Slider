@@ -4,6 +4,8 @@
         <param-name>jakarta.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
+
+    <!-- Faces Servlet Configuration -->
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>
@@ -13,22 +15,27 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
+
+    <!-- Session Timeout -->
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
+
+    <!-- Welcome Page -->
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
+
+    <!-- Security Constraints -->
+    <!-- RESTful Resources -->
     <security-constraint>
         <display-name>JSF Pages</display-name>
         <web-resource-collection>
-            <web-resource-name>SliderPages</web-resource-name>
-            <url-pattern>/faces/slider/*</url-pattern>
+            <web-resource-name>RESTful Resources</web-resource-name>
+            <url-pattern>/rest/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <role-name>JsfGroup</role-name>
+            <role-name>RestGroup</role-name>
             <role-name>Admin</role-name>
         </auth-constraint>
     </security-constraint>

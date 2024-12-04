@@ -30,6 +30,7 @@ import java.util.List;
  */
 @Stateless
 @Path("cst8218.slider.entity.slider")
+@RolesAllowed({"RestGroup", "Admin"})
 public class SliderFacadeREST extends AbstractFacade<Slider> {
     
     private static final Integer DEFAULT_SIZE = 50;
