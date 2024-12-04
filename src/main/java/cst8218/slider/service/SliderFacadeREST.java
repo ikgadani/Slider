@@ -48,6 +48,9 @@ public class SliderFacadeREST extends AbstractFacade<Slider> {
     protected EntityManager getEntityManager() {
         return em;
     }
+    public void setEntityManager(EntityManager em) {
+    this.em = em;
+}
     
     public SliderFacadeREST() {
         super(Slider.class);
