@@ -29,7 +29,7 @@
     <!-- Security Constraints -->
     <!-- RESTful Resources -->
     <security-constraint>
-        <display-name>JSF Pages</display-name>
+        <display-name>RESTful API Security</display-name>
         <web-resource-collection>
             <web-resource-name>RESTful Resources</web-resource-name>
             <url-pattern>/rest/*</url-pattern>
@@ -39,19 +39,43 @@
             <role-name>Admin</role-name>
         </auth-constraint>
     </security-constraint>
+
+    <!-- JSF Slider Pages -->
     <security-constraint>
-        <display-name>Admin Pages</display-name>
+        <display-name>JSF Slider Pages Security</display-name>
         <web-resource-collection>
-            <web-resource-name>AppUserPages</web-resource-name>
+            <web-resource-name>JSF Pages</web-resource-name>
+            <url-pattern>/faces/slider/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>JsfGroup</role-name>
+            <role-name>Admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <!-- Admin Area -->
+    <security-constraint>
+        <display-name>Admin Area Security</display-name>
+        <web-resource-collection>
+            <web-resource-name>Admin Pages</web-resource-name>
             <url-pattern>/faces/appUser/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>Admin</role-name>
         </auth-constraint>
     </security-constraint>
-    <security-role>
-        <role-name>Admin</role-name>
-    </security-role>
+
+    <!-- Login Configuration -->
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>ApplicationRealm</realm-name>
+        <form-login-config>
+            <form-login-page>/faces/login.xhtml</form-login-page>
+            <form-error-page>/faces/error.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+
+    <!-- Security Role Definitions -->
     <security-role>
         <role-name>RestGroup</role-name>
     </security-role>

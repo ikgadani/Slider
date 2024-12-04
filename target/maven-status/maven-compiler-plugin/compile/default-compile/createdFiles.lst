@@ -2,6 +2,7 @@ cst8218slider\presentation\exceptions\PreexistingEntityException.class
 cst8218\slider\ejb\AppUserController.class
 cst8218\slider\ejb\util\JsfUtil.class
 cst8218\slider\entity\AppUser.class
+org\junit\Test.class
 cst8218\slider\ejb\exceptions\NonexistentEntityException.class
 cst8218\slider\ejb\exceptions\PreexistingEntityException.class
 cst8218slider\presentation\exceptions\NonexistentEntityException.class
