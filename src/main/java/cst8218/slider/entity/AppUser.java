@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.security.enterprise.identitystore.DatabaseIdentityStoreDefinition;
 import jakarta.security.enterprise.identitystore.PasswordHash;
 import jakarta.security.enterprise.identitystore.Pbkdf2PasswordHash;
 import java.io.Serializable;
@@ -19,6 +20,13 @@ import java.util.HashMap;
  *
  * @author User
  */
+@DatabaseIdentityStoreDefinition(
+dataSourceLookup = "${'java:comp/DefaultDataSource'}",
+callerQuery = "#{'select password from app.appuser where userid = ?'}",
+groupsQuery = "select groupname from app.appuser where userid = ?",
+hashAlgorithm = PasswordHash.class,
+priority = 10
+)
 @Entity
 public class AppUser implements Serializable {
 

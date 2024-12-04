@@ -5,6 +5,7 @@
 package cst8218.slider.service;
 
 import cst8218.slider.entity.Slider;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -53,6 +54,7 @@ public class SliderFacadeREST extends AbstractFacade<Slider> {
 
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @RolesAllowed({"RestGroup", "Admin"})
     public Response createPost(Slider entity, @Context UriInfo uriInfo) {
         super.create(entity);
         URI location = URI.create(uriInfo.getRequestUri().getPath() + "/" + entity.getId());
@@ -62,6 +64,7 @@ public class SliderFacadeREST extends AbstractFacade<Slider> {
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @RolesAllowed({"RestGroup", "Admin"})
     public Response edit(@PathParam("id") Long id, Slider entity) {
         Slider existingSlider = super.find(id);
         if (existingSlider == null) {
@@ -75,6 +78,7 @@ public class SliderFacadeREST extends AbstractFacade<Slider> {
 
     @DELETE
     @Path("{id}")
+    @RolesAllowed({"RestGroup", "Admin"})
     public Response remove(@PathParam("id") Long id) {
         Slider slider = super.find(id);
         if (slider == null) {
@@ -87,6 +91,7 @@ public class SliderFacadeREST extends AbstractFacade<Slider> {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @RolesAllowed({"RestGroup", "Admin"})
     public Response find(@PathParam("id") Long id) {
         Slider slider = super.find(id);
         if (slider == null) {
@@ -97,6 +102,7 @@ public class SliderFacadeREST extends AbstractFacade<Slider> {
 
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @RolesAllowed({"RestGroup", "Admin"})
     public Response findAllSlider() {
         List<Slider> sliders = super.findAll();
         return Response.ok(sliders).build(); // Return 200 OK with the list of sliders
@@ -105,6 +111,7 @@ public class SliderFacadeREST extends AbstractFacade<Slider> {
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @RolesAllowed({"RestGroup", "Admin"})
     public Response findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         List<Slider> sliders = super.findRange(new int[]{from, to});
         return Response.ok(sliders).build();
@@ -120,6 +127,7 @@ public class SliderFacadeREST extends AbstractFacade<Slider> {
     @GET
     @Path("count")
     @Produces(MediaType.TEXT_PLAIN)
+    @RolesAllowed({"RestGroup", "Admin"})
     public Response countSliders() {
         // Return the count of Slider entities in the database
         return Response.ok(String.valueOf(super.count())).build();
@@ -128,6 +136,7 @@ public class SliderFacadeREST extends AbstractFacade<Slider> {
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"RestGroup", "Admin"})
     public Response createOrUpdateSlider(Slider slider, @Context UriInfo uriInfo) {
         if (slider.getId() == null) {
             // ID is null, so create a new Slider
@@ -155,6 +164,7 @@ public class SliderFacadeREST extends AbstractFacade<Slider> {
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"RestGroup", "Admin"})
     public Response updateSlider(@PathParam("id") Long id, Slider newSlider) {
         // Step 1: Check if the Slider with the given ID exists
         Slider existingSlider = super.find(id);
@@ -188,6 +198,7 @@ public class SliderFacadeREST extends AbstractFacade<Slider> {
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"RestGroup", "Admin"})
     public Response replaceSlider(@PathParam("id") Long id, Slider newSlider) {
         // Step 1: Check if the ID in the request body matches the URL ID (if ID is provided in body)
         if (newSlider.getId() != null && !newSlider.getId().equals(id)) {
@@ -223,6 +234,7 @@ public class SliderFacadeREST extends AbstractFacade<Slider> {
     @PUT
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"RestGroup", "Admin"})
     public Response handlePutOnRoot() {
         // Step 6: Return a 405 Method Not Allowed response for PUT on the root resource
         return Response.status(Response.Status.METHOD_NOT_ALLOWED)
