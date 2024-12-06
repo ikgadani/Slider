@@ -1,10 +1,10 @@
+package JunitTests;
+
 import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import cst8218.slider.ejb.SliderFacade;
 import cst8218.slider.entity.Slider;
 import cst8218.slider.game.SliderGame;
-import jakarta.ejb.EJB;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
@@ -13,20 +13,40 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
+/**
+ * Unit tests for the {@link SliderGame} class.
+ * These tests verify the behavior of the game loop and interactions with the {@link SliderFacade}.
+ * Mock objects are used to isolate the SliderGame logic and avoid database dependencies.
+ * 
+ * @author Guntas Singh Chugh
+ */
 class SliderGameTest {
 
     @Mock
     private SliderFacade mockSliderFacade;  // Mocking the SliderFacade
+
     @InjectMocks
     private SliderGame sliderGame;  // The class under test
 
     private CountDownLatch latch;  // To synchronize the background thread with the test
 
+    /**
+     * Sets up mock objects before each test.
+     */
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);  // Initialize mocks before each test
     }
 
+    /**
+     * Tests the game loop with a list of sliders.
+     * Verifies that:
+     * - Sliders are fetched using {@link SliderFacade#findAll()}.
+     * - The timeStep method is called on each slider.
+     * - The updated sliders are saved back using {@link SliderFacade#edit(Slider)}.
+     * 
+     * @throws InterruptedException if the test thread is interrupted while waiting.
+     */
     @Test
     void testGameLoopAndFacadeInteraction() throws InterruptedException {
         // Create mock Slider entities
@@ -76,7 +96,16 @@ class SliderGameTest {
         // Verify that the SliderFacade's edit method is called for each slider
         verify(mockSliderFacade, atLeastOnce()).edit(any(Slider.class));  // Edit should be called for each slider at least once
     }
-    
+
+    /**
+     * Tests the game loop with no sliders.
+     * Verifies that:
+     * - {@link SliderFacade#findAll()} is called.
+     * - The timeStep method is not called since no sliders are present.
+     * - {@link SliderFacade#edit(Slider)} is not called.
+     * 
+     * @throws InterruptedException if the test thread is interrupted while waiting.
+     */
     @Test
     void testGameLoopWithEmptySliders() throws InterruptedException {
         // Simulate an empty list of sliders from the SliderFacade
