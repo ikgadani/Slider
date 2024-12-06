@@ -17,10 +17,12 @@ import jakarta.ws.rs.core.Application;
  */
 @ApplicationPath("resources")
 
+/*
 @FormAuthenticationMechanismDefinition(
         loginToContinue = @LoginToContinue(
                 loginPage = "/login.html",
                 errorPage = "/login.html"))
+*/
 
 @BasicAuthenticationMechanismDefinition
 @DatabaseIdentityStoreDefinition(
