@@ -23,13 +23,56 @@
 <body>
     <div id="root"></div>
     <script type="text/babel" data-type="module">
-        import React, { useEffect, useState, useRef } from 'react';
+        import React, { useState, useEffect, useRef } from 'react';
         import { createRoot } from 'react-dom/client';
 
-        function Slider() {
+        function Login({ onLogin }) {
+            const [userId, setUserId] = useState('');
+            const [password, setPassword] = useState('');
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                if (userId && password) {
+                    onLogin(userId, password);
+                } else {
+                    alert("Please enter both userId and password");
+                }
+            };
+
+            return (
+                <form onSubmit={handleSubmit}>
+                    <h2>Login</h2>
+                    <div>
+                        <label>
+                            User ID:
+                            <input
+                                type="text"
+                                value={userId}
+                                onChange={(e) => setUserId(e.target.value)}
+                            />
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            Password:
+                            <input
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </label>
+                    </div>
+                    <button type="submit">Login</button>
+                </form>
+            );
+        }
+
+        function Slider({ credentials }) {
             const [selected, setSelected] = useState(null);
             const [slider, setSlider] = useState([]);
             const canvasRef = useRef(null);
+
+            const { userId, password } = credentials;
 
             // Fetch slider data
             useEffect(() => {
@@ -39,7 +82,10 @@
                             "http://localhost:8080/Slider/resources/cst8218.slider.entity.slider",
                             {
                                 method: 'GET',
-                                headers: { 'Accept': 'application/json' }
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'Authorization': 'Basic ' + btoa(`${userId}:${password}`)
+                                }
                             }
                         );
                         const json = await result.json();
@@ -49,7 +95,7 @@
                     }
                 }
                 getSlider();
-            }, []);
+            }, [userId, password]);
 
             // Handle input changes
             function handleChange(event, field, index) {
@@ -76,7 +122,7 @@
                             body: JSON.stringify(updatedItem),
                             headers: {
                                 'Content-type': 'application/json',
-                                'Authorization': 'Basic ' + btoa('tgk:tgkpass')
+                                'Authorization': 'Basic ' + btoa(`${userId}:${password}`)
                             }
                         }
                     );
@@ -93,7 +139,6 @@
             const drawCanvas = () => {
                 if (canvasRef.current) {
                     const ctx = canvasRef.current.getContext('2d');
-                    // Clear the canvas only once before rendering the shapes
                     ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 
                     slider.forEach(item => {
@@ -104,17 +149,15 @@
                         const currentTravel = parseInt(item.currentTravel);
                         const mvtDirection = item.mvtDirection === "horizontal" ? 1 : -1;
 
-                        // Draw circles based on slider values
                         ctx.beginPath();
-                        ctx.arc(x, y, size / 2, 0, Math.PI * 2); // Create a circle (size/2 for radius)
+                        ctx.arc(x, y, size / 2, 0, Math.PI * 2);
                         ctx.fillStyle = 'blue';
                         ctx.fill();
                         ctx.closePath();
 
-                        // Optionally, animate the sliders (e.g., move along the x-axis)
                         const newX = x + mvtDirection * currentTravel;
                         ctx.beginPath();
-                        ctx.arc(newX, y, size / 2, 0, Math.PI * 2); // Draw new position
+                        ctx.arc(newX, y, size / 2, 0, Math.PI * 2);
                         ctx.fillStyle = 'blue';
                         ctx.fill();
                         ctx.closePath();
@@ -122,10 +165,9 @@
                 }
             };
 
-
             useEffect(() => {
                 drawCanvas();
-            }, [slider, selected]);
+            }, [slider]);
 
             return (
                 <div>
@@ -161,18 +203,28 @@
                         </table>
                         {selected && <button type="submit">Submit</button>}
                     </form>
-                    <canvas
-                        ref={canvasRef}
-                        width={800}
-                        height={400}
-                    ></canvas>
+                    <canvas ref={canvasRef} width={800} height={400}></canvas>
+                </div>
+            );
+        }
+
+        function App() {
+            const [credentials, setCredentials] = useState(null);
+
+            const handleLogin = (userId, password) => {
+                setCredentials({ userId, password });
+            };
+
+            return (
+                <div>
+                    {credentials ? <Slider credentials={credentials} /> : <Login onLogin={handleLogin} />}
                 </div>
             );
         }
 
         const container = document.getElementById('root');
         const root = createRoot(container);
-        root.render(<Slider />);
+        root.render(<App />);
     </script>
 </body>
 </html>
