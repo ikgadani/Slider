@@ -25,7 +25,7 @@ Features:
   Technologies Used:
     Backend: Java, REST API
     Frontend: React, JSF, HTML5 Canvas
-    Database: (Specify your database system here, e.g., MySQL, MongoDB)
+    Database: MySQL
     Testing: Selenium, JUnit
     Mobile Development: Kotlin, Java
     Desktop Application: Java Swing
